@@ -1,0 +1,20 @@
+{
+  "name": "my_socket.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "vite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.1",
+    "socket.io-client": "^4.8.3",
+    "tailwindcss": "^4.3.1",
+    "toastify-js": "^1.12.0",
+    "vite": "^8.1.0"
+  }
+}

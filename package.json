@@ -1,0 +1,13 @@
+{
+  "name": "my_socket.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd back && npm start & cd front && npm run start",
+    "setup": "cd back && npm i & cd front && npm i",
+    "start:back": "cd back && npm start",
+    "start:front": "cd front && npm run start"
+  },
+  "private": true
+}
