@@ -5,6 +5,10 @@ Node.js + Socket.IO + Tailwind CSS + Chart.js**. Monitors CPU, memory, disk,
 network, GPU, process health, and system logs — all streamed live via WebSocket
 to a responsive browser UI.
 
+## Document translation
+
+[Français](docs/fr.md) | [فارسی](docs/fa.md) | [Deutsch](docs/de.md)
+
 ## Features
 
 | Feature                | Description                                                                                   |
@@ -185,8 +189,6 @@ Max 100 concurrent clients. Client receives cached data immediately on connect.
   all metrics into a Tailwind grid layout with two Chart.js line charts.
 - **Health level** is computed client-side: CRITICAL at CPU >= 85%, memory >=
   90%, disk >= 90%, event loop lag >= 40ms; WARNING at lower thresholds.
-- **Electron** wraps the whole stack into a native desktop window with no
-  external dependencies at runtime.
 
 ## Platform Support
 
