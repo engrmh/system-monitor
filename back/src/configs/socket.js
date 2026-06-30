@@ -1,7 +1,9 @@
 const { Server } = require('socket.io');
-const {
-  getMonitoring,
-} = require('../controllers/monitoring/monitoring.controller');
+const { getMonitoringData } = require('../controllers/monitoring/monitoring.controller');
+const { trackConnection, trackDisconnection } = require('../utils/monitoring/connections');
+
+const MAX_CONNECTIONS = 100;
+const BROADCAST_INTERVAL_MS = 1000;
 
 exports.socketIo = (server) => {
   const io = new Server(server, {
@@ -14,21 +16,42 @@ exports.socketIo = (server) => {
     transports: ['websocket', 'polling'],
   });
 
+  let latestData = null;
+  let clientCount = 0;
+
+  const broadcastInterval = setInterval(async () => {
+    try {
+      latestData = await getMonitoringData();
+      io.emit('monitoring', latestData);
+    } catch (err) {
+      console.error('[socket] Broadcast failed:', err.message);
+    }
+  }, BROADCAST_INTERVAL_MS);
+
   io.on('connection', (socket) => {
-    console.log('Socket.io Started');
-    // console.log(socket.id);
+    if (clientCount >= MAX_CONNECTIONS) {
+      socket.emit('error', { message: 'Connection limit reached' });
+      socket.disconnect(true);
+      return;
+    }
 
-    const interval = setInterval(() => {
-      getMonitoring(socket);
-    }, 1000);
+    clientCount++;
+    trackConnection();
+    console.log(`Client connected: ${socket.id} (${clientCount} active)`);
 
-    socket.on('get-monitoring', () => {
-      getMonitoring(socket);
-    });
+    if (latestData) {
+      socket.emit('monitoring', latestData);
+    }
 
     socket.on('disconnect', () => {
-      console.log('user disconnected');
-      clearInterval(interval);
+      clientCount = Math.max(0, clientCount - 1);
+      trackDisconnection();
+      console.log(`Client disconnected: ${socket.id} (${clientCount} active)`);
     });
+  });
+
+  process.on('SIGTERM', () => {
+    clearInterval(broadcastInterval);
+    io.close();
   });
 };

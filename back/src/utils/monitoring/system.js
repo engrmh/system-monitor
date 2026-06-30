@@ -3,15 +3,11 @@
 const os = require('node:os');
 const process = require('node:process');
 
-/**
- * Collects static system info — run once, cache result.
- * MAC addresses, username, home dir are intentionally excluded.
- */
+
 function getStaticInfo() {
   try {
     const cpus = os.cpus();
 
-    // Only interface names — no IPs, no MACs
     const networkNames = Object.keys(os.networkInterfaces());
 
     return {
@@ -26,7 +22,7 @@ function getStaticInfo() {
         platform: os.platform(),
         type: os.type(),
         release: os.release(),
-        machine: os.machine?.() ?? os.arch(), // os.machine() is Node 18.9+
+        machine: os.machine?.() ?? os.arch(),
         tmpDir: os.tmpdir(),
       },
       memory: {

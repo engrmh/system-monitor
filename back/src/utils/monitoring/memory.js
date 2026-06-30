@@ -3,9 +3,6 @@
 const os = require('node:os');
 const process = require('node:process');
 
-/**
- * Returns system memory stats + current process heap usage.
- */
 function collectMemory() {
   try {
     const total = os.totalmem();
@@ -25,10 +22,10 @@ function collectMemory() {
         usedPercent: +((used / total) * 100).toFixed(1),
       },
       process: {
-        rss: toMB(procMem.rss), // Resident Set Size — actual RAM used
+        rss: toMB(procMem.rss),
         heapTotal: toMB(procMem.heapTotal),
         heapUsed: toMB(procMem.heapUsed),
-        external: toMB(procMem.external), // C++ objects bound to JS
+        external: toMB(procMem.external),
       },
     };
   } catch (err) {

@@ -7,7 +7,12 @@
     "start": "cd back && npm start & cd front && npm run start",
     "setup": "cd back && npm i & cd front && npm i",
     "start:back": "cd back && npm start",
-    "start:front": "cd front && npm run start"
+    "start:front": "cd front && npm run start",
+    "build:frontend": "cd front && npm run build",
+    "setup:electron": "cd electron && npm install",
+    "build:win": "cd electron && npm run build:win",
+    "build:linux": "cd electron && npm run build:linux",
+    "build:mac": "cd electron && npm run build:mac"
   },
   "private": true
 }

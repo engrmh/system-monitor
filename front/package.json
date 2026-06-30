@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "vite"
+    "start": "vite",
+    "build": "vite build"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +13,7 @@
   "type": "commonjs",
   "dependencies": {
     "@tailwindcss/vite": "^4.3.1",
+    "chart.js": "^4.5.1",
     "socket.io-client": "^4.8.3",
     "tailwindcss": "^4.3.1",
     "toastify-js": "^1.12.0",
