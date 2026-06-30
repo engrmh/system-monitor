@@ -1,6 +1,6 @@
 # Realtime System Monitor Dashboard
 
-A desktop application for real-time system telemetry, built with **Electron +
+A application for real-time system telemetry, built with **Electron +
 Node.js + Socket.IO + Tailwind CSS + Chart.js**. Monitors CPU, memory, disk,
 network, GPU, process health, and system logs — all streamed live via WebSocket
 to a responsive browser UI.
